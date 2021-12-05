@@ -4,13 +4,16 @@ import { useEffect, useState } from "react";
 const BASE_URL = "http://localhost:4000";
 const GetTodo = () => {
   const [todo, setTodo] = useState([]);
-
   useEffect(() => {
     getTodos();
   }, []);
   const getTodos = async () => {
     let id = "61ac9717bc01bd4bd3a4f03b";
-    const result = await axios.get(`${BASE_URL}/getTodo/${id}`);
+    const tocken=localStorage.getItem("user")
+    console.log(tocken);
+    const result = await axios.get(`${process.env.REACT_APP_BASE_UR}/getTodo/${id}`,{
+      headers:`Brearer `
+    });
     console.log(result.data);
     if (result.data === "no todos for this user") {
       setTodo([]);
@@ -32,7 +35,7 @@ const GetTodo = () => {
     // const todoId="61acc1437063cd2253f029d4";
     console.log(e.target.task.value);
     const name=e.target.task.value;
-    const result = await axios.post(`${BASE_URL}/createTodo`,{
+    const result = await axios.post(`${process.env.REACT_APP_BASE_UR}/createTodo`,{
       name, id
     });
     console.log(result);

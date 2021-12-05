@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import axios from "axios";
 import GetTodo from "../GetTodo";
-const BASE_URL = "http://localhost:4000";
+// const BASE_URL = "http://localhost:4000";
 
 const Login = () => {
   const [password, setPassword] = useState("");
@@ -10,12 +10,14 @@ const Login = () => {
   const logIn = (e) => {
     e.preventDefault();
     axios
-      .post(`${BASE_URL}/login`, {
+      .post(`${process.env.REACT_APP_BASE_URL}/login`, {
         email: e.target.email.value,
         password: e.target.password.value,
       })
       .then((result) => {
-        console.log(result.data);
+        const tocken=result.data.token
+        localStorage.setItem("user",tocken)
+        console.log(result.data.token);
         console.log("succed");
       })
       .catch((err) => {
@@ -27,7 +29,7 @@ const Login = () => {
       <form onSubmit={logIn} method="post">
         <input type="email" name="email" />
         <input type="password" name="password" />
-        <button type="submit">sign up</button>
+        <button type="submit">sign in</button>
       </form>
     </div>
   );
