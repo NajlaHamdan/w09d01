@@ -1,12 +1,21 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router";
 import GetTodo from "../GetTodo";
 // const BASE_URL = "http://localhost:4000";
 
 const Login = () => {
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
+  const [token, setToken] = useState("");
+  const [id, setId] = useState("");
+  const navigate = useNavigate();
+  useEffect(() => {
+    const token = localStorage.getItem("user");
+    const id = localStorage.getItem("id");
+    // console.log(token);
+    setToken(token);
+    setId(id);
+  }, []);
   const logIn = (e) => {
     e.preventDefault();
     axios
@@ -15,10 +24,13 @@ const Login = () => {
         password: e.target.password.value,
       })
       .then((result) => {
-        const tocken=result.data.token
-        localStorage.setItem("user",tocken)
-        console.log(result.data.token);
-        console.log("succed");
+        const token = result.data.token;
+        const id = result.data.result._id;
+        localStorage.setItem("user", token);
+        localStorage.setItem("id", id);
+        console.log(token, id);
+        navigate(`/getTodo`);
+        setToken(token);
       })
       .catch((err) => {
         console.log(err);

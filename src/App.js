@@ -12,8 +12,8 @@ function App() {
       <Logout/>
        <Routes>
         <Route exact path="/login" element={<Login />} />
+        <Route exact path="/getTodo" element={<GetTodo />} />
         <Route exact path="/signup" element={<SignUp />} />
-        <Route exact path="/" element={<SignUp />} />
       </Routes>
       {/* <GetTodo /> */}
       {/* <SignUp /> */}
