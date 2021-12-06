@@ -8,20 +8,18 @@ const GetTodo = () => {
     getTodos();
   }, []);
   const getTodos = async () => {
-    try{
+    try {
       let id = localStorage.getItem("id");
-    const token = localStorage.getItem("user");
-    console.log(token);
-    const result = await axios.get(
-      `http://localhost:4000/getTodo/${id}`
-    );
-    console.log(result.data);
-    if (result.data === "no todos for this user") {
-      setTodo([]);
-    } else {
-      setTodo(result.data);
-    }
-    }catch(err){
+      const token = localStorage.getItem("user");
+      console.log(token);
+      const result = await axios.get(`http://localhost:4000/getTodo/${id}`);
+      console.log(result.data);
+      if (result.data === "no todos for this user") {
+        setTodo([]);
+      } else {
+        setTodo(result.data);
+      }
+    } catch (err) {
       console.log(err);
     }
   };
@@ -31,7 +29,7 @@ const GetTodo = () => {
     const todoId = itemId;
     const token = localStorage.getItem("user");
     const result = await axios.delete(
-      `${BASE_URL}/deleteTodo/${id}/${todoId}`,
+      `${process.env.REACT_APP_BASE_URL}/deleteTodo/${id}/${todoId}`,
       {
         headers: { Authorization: `Brearer ${token}` },
       }
@@ -63,10 +61,9 @@ const GetTodo = () => {
       console.log(err);
     }
   };
-
-  const update =async (todoId) => {
+  const update = async (todoId) => {
     try {
-      const name=prompt("enter your todo");
+      const name = prompt("enter your todo");
       console.log(name);
       console.log(todoId);
       const token = localStorage.getItem("user");
@@ -77,7 +74,9 @@ const GetTodo = () => {
       const result = await axios.post(
         `${process.env.REACT_APP_BASE_URL}/updateById`,
         {
-          name, id, todoId
+          name,
+          id,
+          todoId,
         },
         {
           headers: { Authorization: `Brearer ${token}` },
@@ -106,9 +105,13 @@ const GetTodo = () => {
               >
                 delete
               </button>
-              <button onClick={() => {
+              <button
+                onClick={() => {
                   update(item._id);
-                }}>update</button>
+                }}
+              >
+                update
+              </button>
             </div>
           ))
         : "no todos for this user"}

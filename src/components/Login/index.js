@@ -29,7 +29,11 @@ const Login = () => {
         localStorage.setItem("user", token);
         localStorage.setItem("id", id);
         console.log(token, id);
-        navigate(`/getTodo`);
+        if(result.data.result.role=="61ac96cfbc01bd4bd3a4f037"){
+          navigate(`/getTodo`);
+        }else{
+          navigate(`/admin`);
+        }
         setToken(token);
       })
       .catch((err) => {

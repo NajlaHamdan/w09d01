@@ -5,6 +5,7 @@ import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import {Routes,Route }from "react-router-dom";
 import Logout from "./components/Logout";
+import Admin from "./components/Admin";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/getTodo" element={<GetTodo />} />
         <Route exact path="/signup" element={<SignUp />} />
+        <Route exact path="/admin" element={<Admin />} />
       </Routes>
       {/* <GetTodo /> */}
       {/* <SignUp /> */}
