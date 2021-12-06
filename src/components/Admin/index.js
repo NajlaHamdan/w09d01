@@ -16,7 +16,7 @@ const Admin = () => {
             headers: { Authorization: `Brearer ${token}` },
           });
           console.log(result.data);
-          if (result.data === "no todos for this user") {
+          if (result.data === "no todos") {
             setTodo([]);
           } else {
             setTodo(result.data);
@@ -37,6 +37,11 @@ const Admin = () => {
           }
         );
         console.log(result.data);
+        if (result.data === "already deleted") {
+            setTodo([]);
+          } else {
+            setTodo(result.data);
+          }
         getTodos();
       };
       const deleteUsers = async (itemId) => {
@@ -77,7 +82,7 @@ const Admin = () => {
                
               </div>
             ))
-          : "no todos for this user"}
+          : "no todos"}
       </div>
     )
 }
