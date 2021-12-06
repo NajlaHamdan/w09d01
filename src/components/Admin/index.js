@@ -1,5 +1,4 @@
 import React from 'react'
-
 import axios from "axios";
 import { useEffect, useState } from "react";
 const Admin = () => {
@@ -13,7 +12,7 @@ const Admin = () => {
           const token = localStorage.getItem("user");
           console.log(token);
           const result = await axios.get(`${process.env.REACT_APP_BASE_URL}/getAllTodos`,{
-            headers: { Authorization: `Brearer ${token}` },
+            headers: { Authorization: `Bearer ${token}` },
           });
           console.log(result.data);
           if (result.data === "no todos") {
