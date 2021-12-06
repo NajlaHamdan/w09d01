@@ -52,7 +52,7 @@ const GetTodo = () => {
           id,
         },
         {
-          headers: { Authorization: `Brearer ${token}` },
+          headers: { Authorization: `Bearer ${token}` },
         }
       );
       console.log(result);
@@ -79,7 +79,7 @@ const GetTodo = () => {
           todoId,
         },
         {
-          headers: { Authorization: `Brearer ${token}` },
+          headers: { Authorization: `Bearer ${token}` },
         }
       );
       console.log(result);
